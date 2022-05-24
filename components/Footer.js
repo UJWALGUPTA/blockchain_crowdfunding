@@ -109,10 +109,6 @@ export default function Footer() {
 				>
 					<Text>🌐 Made with ❤️ by Ujwal Gupta</Text>
 					<Stack direction={"row"} spacing={6}>
-						<SocialButton label={"Website"} href={"https://harshbadhai.me/"}>
-							{" "}
-							<FaGlobe />
-						</SocialButton>
 						<SocialButton
 							label={"Twitter"}
 							href={"https://twitter.com/itsujwalgupta"}
