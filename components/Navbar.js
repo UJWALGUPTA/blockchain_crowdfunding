@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useWallet } from "use-wallet";
 
+import Web3 from "web3";
 import NextLink from "next/link";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { ChevronDownIcon } from "@chakra-ui/icons";
@@ -25,8 +26,39 @@ export default function NavBar() {
 	// if (typeof window.ethereum !== "undefined") {
 	// 	console.log("MetaMask is installed!");
 	// }
+	let web3;
+	if (typeof window !== "undefined") {
+		web3 = new Web3(window.ethereum);
+	}
 
-	console.log(wallet);
+	const switchNetwork = async (chainId) => {
+		const currentChainId = await getNetworkId();
+
+		if (currentChainId !== chainId) {
+			try {
+				await web3.currentProvider
+					.request({
+						method: "wallet_switchEthereumChain",
+						params: [{ chainId: Web3.utils.toHex(chainId) }],
+					})
+					.then(() => {
+						wallet.connect();
+					});
+			} catch (switchError) {
+				// This error code indicates that the chain has not been added to MetaMask.
+				if (switchError.code === 4902) {
+					alert("add this chain id");
+				}
+			}
+		} else {
+			wallet.connect();
+		}
+	};
+
+	const getNetworkId = async () => {
+		const currentChainId = await web3.eth.net.getId();
+		return currentChainId;
+	};
 
 	return (
 		<Box>
@@ -130,7 +162,7 @@ export default function NavBar() {
 									_hover={{
 										bg: "teal.300",
 									}}
-									onClick={() => wallet.connect()}
+									onClick={() => switchNetwork(4)}
 								>
 									Connect Wallet{" "}
 								</Button>

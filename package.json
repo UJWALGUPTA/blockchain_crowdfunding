@@ -29,6 +29,6 @@
 		"solc": "^0.4.17",
 		"truffle-hdwallet-provider": "^1.0.17",
 		"use-wallet": "^0.8.1",
-		"web3": "^1.7.3"
+		"web3": "^1.7.4"
 	}
 }
