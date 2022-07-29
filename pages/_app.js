@@ -6,33 +6,33 @@ import Footer from "../components/Footer";
 import "@fontsource/space-grotesk";
 
 const theme = extendTheme({
-  fonts: {
-    heading: "Space Grotesk",
-    body: "Space Grotesk",
-  },
+	fonts: {
+		heading: "Space Grotesk",
+		body: "Space Grotesk",
+	},
 });
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      {" "}
-      <ChakraProvider theme={theme}>
-        <UseWalletProvider
-          chainId={4}
-          connectors={{
-            walletconnect: {
-              rpcUrl:
-                "https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
-            },
-          }}
-        >
-          <NavBar />
-          <Component {...pageProps} />
-          <Footer />{" "}
-        </UseWalletProvider>
-      </ChakraProvider>
-    </>
-  );
+	return (
+		<>
+			{" "}
+			<ChakraProvider theme={theme}>
+				<UseWalletProvider
+					chainId={4}
+					connectors={{
+						walletconnect: {
+							rpcUrl:
+								"https://rinkeby.infura.io/v3/9384b1e49a804c34999f76fcd7f587c8",
+						},
+					}}
+				>
+					<NavBar />
+					<Component {...pageProps} />
+					<Footer />{" "}
+				</UseWalletProvider>
+			</ChakraProvider>
+		</>
+	);
 }
 
 export default MyApp;
